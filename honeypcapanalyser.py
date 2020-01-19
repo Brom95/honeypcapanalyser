@@ -114,8 +114,8 @@ def main(args):
         # print(results.items())
         newlist = sorted(results.values(), key=lambda x: x.total_packets, reverse=True)
     if args.l:
-        if len(newlist) > args.l:
-            print_list(newlist[:args.l])
+        if len(newlist) > int(args.l):
+            print_list(newlist[:int(args.l)])
         else:
             print_list(newlist)
     else:
