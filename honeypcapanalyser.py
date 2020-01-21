@@ -7,15 +7,16 @@ from pcapfile.protocols.linklayer import ethernet
 import os
 import subprocess
 import threading
+
 results = {}
 
 
 def get_pcaps_list(path):
+    result = []
     if os.path.isdir(path):
-        result = []
         for file in os.listdir(path):
             if os.path.isfile(
-                os.path.join(path, file)
+                    os.path.join(path, file)
             ) and "pcap" in os.path.splitext(
                 os.path.join(path, file)
             )[1]:
@@ -58,10 +59,10 @@ class IPresult():
                 k = k_v[0].decode("utf-8").strip()
                 v = b":".join(k_v[1:]).decode("utf-8").strip()
                 if self.info.get(k):
-                    if self.info[k] != v+" ":
-                        self.info[k] += v+" "
+                    if self.info[k] != v + " ":
+                        self.info[k] += v + " "
                 else:
-                    self.info[k] = v+" "
+                    self.info[k] = v + " "
 
             except Exception as e:
                 pass
@@ -85,7 +86,6 @@ def add_packet(ip_addr, ip_packet):
         results[ip_addr].add_packet(ip_packet)
         for k in results[ip_addr].info.keys():
             print(k, results[ip_addr].info[k])
-        # exit()
 
 
 def print_list(newlist):
